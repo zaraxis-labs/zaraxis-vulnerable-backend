@@ -12,7 +12,7 @@ on:
 
 env:
   REGISTRY: docker.io/zaraxislabs
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: zaraxis-vulnerable-backend
 
 jobs:
   build-image:
@@ -39,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/{{ env.IMAGE_NAME }}:latest
           tags: |
             type=ref,event=branch
             type=ref,event=pr
