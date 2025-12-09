@@ -1,5 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
+import helloRoutes from './routes/hello';
+import healthRoutes from './routes/health';
+import authRoutes from './routes/auth';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -8,15 +11,10 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Hello World endpoint
-app.get('/api/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello World' });
-});
-
-// Health check endpoint
-app.get('/api/health', (req: Request, res: Response) => {
-  res.json({ status: 'ok' });
-});
+// Routes
+app.use('/api', helloRoutes);
+app.use('/api', healthRoutes);
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
